@@ -1,15 +1,18 @@
 import 'package:doctor/model/patient_model.dart';
-import 'package:doctor/view_model/bloc/patient_bloc/patient_cubit.dart';
+import 'package:doctor/view/screens/doctor/patient/patient_details_screen.dart';
 import 'package:doctor/view_model/bloc/patient_bloc/patient_cubit.dart';
 import 'package:doctor/view_model/bloc/patient_bloc/patient_state.dart';
+import 'package:doctor/view_model/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PatientCard extends StatelessWidget {
-  DataP? dataP;
+  final DataP? dataP;
+  int? currentIndex;
 
-   PatientCard({required this.dataP, Key? key}) : super(key: key);
+  PatientCard({required this.dataP, required this.currentIndex, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,13 @@ class PatientCard extends StatelessWidget {
       builder: (context, state) {
         var cubit = PatientCubit.get(context);
         return InkWell(
-          onTap: () {},
+          onTap: () {
+            cubit.changeCurrentIndex(currentIndex);
+            Navigation.goPush(
+              context,
+              PatientDetailsScreen(),
+            );
+          },
           borderRadius: BorderRadius.circular(
             20.r,
           ),

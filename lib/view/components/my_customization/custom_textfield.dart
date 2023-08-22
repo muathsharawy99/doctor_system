@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   final String? Function(String? v)? validator;
   final TextInputAction? whatToDoNext;
+  final BorderSide? borderSide;
 
   const CustomTextField({
     Key? key,
@@ -29,6 +30,7 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     this.validator,
     this.whatToDoNext,
+    this.borderSide,
     required this.controller,
     required this.keyboardType,
   }) : super(key: key);
@@ -46,7 +48,7 @@ class CustomTextField extends StatelessWidget {
         obscureText: obscureText ?? false,
         validator: validator,
         textInputAction: whatToDoNext,
-        onFieldSubmitted: (v)=> FocusScope.of(context).nextFocus(),
+        onFieldSubmitted: (v) => FocusScope.of(context).nextFocus(),
         decoration: InputDecoration(
           filled: filled,
           fillColor: fillColor,
@@ -55,6 +57,7 @@ class CustomTextField extends StatelessWidget {
           prefixIcon: prefixIcon,
           hintText: hintText,
           border: OutlineInputBorder(
+            borderSide: borderSide ?? const BorderSide(),
             borderRadius: BorderRadius.circular(
               radius ?? 0.r,
             ),

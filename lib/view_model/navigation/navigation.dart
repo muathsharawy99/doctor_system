@@ -4,6 +4,13 @@ import 'package:flutter/material.dart';
 class Navigation {
 
 
+
+
+  static void goPop(context){
+    Navigator.pop(context);
+  }
+
+
   static void goPush(context, Widget screen) {
     Navigator.push(
       context,

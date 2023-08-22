@@ -1,5 +1,6 @@
 import 'package:doctor/model/patient_model.dart';
 import 'package:doctor/view/components/components/patient_card.dart';
+import 'package:doctor/view/components/my_customization/custom_button.dart';
 import 'package:doctor/view_model/bloc/patient_bloc/patient_cubit.dart';
 import 'package:doctor/view_model/bloc/patient_bloc/patient_state.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +23,17 @@ class AllPatient extends StatelessWidget {
             ),
             child: ListView.separated(
               itemBuilder: (context, index) => PatientCard(
-                dataP: cubit.patientModel?.data?.data?[index]  ?? DataP() ,
+                currentIndex: index,
+                dataP: cubit.patientModel?.data?.data?[index] ?? DataP(),
               ),
               separatorBuilder: (context, index) => SizedBox(height: 10.h),
               itemCount: cubit.patientModel?.data?.data?.length ?? 1,
+            ),
+          ),
+          bottomNavigationBar: CustomButton(
+            onPressed: () {},
+            child: Text(
+              "data",
             ),
           ),
         );
