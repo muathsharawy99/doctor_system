@@ -1,5 +1,4 @@
 import 'package:doctor/view/screens/auth/register_screen.dart';
-import 'package:doctor/view/screens/doctor/patient/all_patient_screen.dart';
 import 'package:doctor/view_model/bloc/login_bloc/login_cubit.dart';
 import 'package:doctor/view_model/bloc/patient_bloc/patient_cubit.dart';
 import 'package:doctor/view_model/bloc/register_bloc/register_cubit.dart';
@@ -23,9 +22,9 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -35,24 +34,23 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) => RegisterCubit(),
-            ),BlocProvider(
+            ),
+            BlocProvider(
               create: (context) => LoginCubit(),
-            ),BlocProvider(
+            ),
+            BlocProvider(
               create: (context) => PatientCubit()..getAllPatient(),
             )
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: AllPatient(),
-
-            // AnimatedSplashScreen(
-            //   // duration: 60000,
-            //   backgroundColor: Colors.blue,
-            //   nextScreen: RegisterScreen(),
-            //   splashTransition: SplashTransition.fadeTransition,
-            //   splash: SplashScreen(),
-            //   splashIconSize: MediaQuery.of(context).size.width,
-            // ),
+            home: AnimatedSplashScreen(
+              backgroundColor: Colors.white,
+              nextScreen: const RegisterScreen(),
+              splashTransition: SplashTransition.fadeTransition,
+              splash: const SplashScreen(),
+              splashIconSize: MediaQuery.of(context).size.height,
+            ),
           ),
         );
       },

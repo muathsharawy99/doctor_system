@@ -25,17 +25,14 @@ class PatientCard extends StatelessWidget {
             cubit.changeCurrentIndex(currentIndex);
             Navigation.goPush(
               context,
-              PatientDetailsScreen(),
+              const PatientDetailsScreen(),
             );
           },
           borderRadius: BorderRadius.circular(
             20.r,
           ),
           child: Container(
-            padding: EdgeInsets.all(
-              10.w,
-            ),
-            width: 50.w,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
             height: 175.h,
             decoration: BoxDecoration(
               color: Colors.blue,
@@ -43,42 +40,62 @@ class PatientCard extends StatelessWidget {
                 20.r,
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Row(
               children: [
-                Text(
-                  "Name : ${dataP?.name}",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.sp,
-                    color: Colors.white,
+                Container(
+                  width: 120.h,
+                  height: 175.h,
+                  color: Colors.white,
+                  child: Image.asset(
+                    "assets/images/patient.png",
+                    fit: BoxFit.fill,
                   ),
                 ),
-                Text(
-                  "Diagnosis : ${dataP?.diagnosis}",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "Visit Time : ${dataP?.visitTime}",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "Address : ${dataP?.address}",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.white,
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.all(
+                      10.w,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          dataP?.name ?? "No Name",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.sp,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          dataP?.diagnosis ?? "No Diagnosis",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          dataP?.visitTime ?? "No Visit Time",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          dataP?.address ?? "No Address",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

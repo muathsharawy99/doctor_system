@@ -1,6 +1,7 @@
 import 'package:doctor/model/patient_model.dart';
 import 'package:doctor/view/components/components/patient_card.dart';
 import 'package:doctor/view/components/my_customization/custom_button.dart';
+import 'package:doctor/view/screens/doctor/doctor_profile_screen.dart';
 import 'package:doctor/view/screens/doctor/patient/add_patient_screen.dart';
 import 'package:doctor/view_model/bloc/patient_bloc/patient_cubit.dart';
 import 'package:doctor/view_model/bloc/patient_bloc/patient_state.dart';
@@ -8,9 +9,10 @@ import 'package:doctor/view_model/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
-class AllPatient extends StatelessWidget {
-  AllPatient({Key? key}) : super(key: key);
+class AllPatientScreen extends StatelessWidget {
+  const AllPatientScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +32,62 @@ class AllPatient extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            actions: [
+              Padding(
+                padding: EdgeInsetsDirectional.only(
+                  end: 10.w,
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigation.goPush(
+                      context,
+                      const DoctorScreen(),
+                    );
+                  },
+                  child: Container(
+                    width: 45.w,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: Image.asset(
+                          "assets/images/doctor.png",
+                        ).image,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
           body: state is GetAllPatientLoadingState
               ? Center(
-                  child: CircularProgressIndicator.adaptive(),
+                  child: LottieBuilder.asset(
+                    "assets/lottie_files/waiting.json",
+                  ),
                 )
               : Padding(
                   padding: EdgeInsets.all(
                     10.w,
                   ),
-                  child: ListView.separated(
-                    itemBuilder: (context, index) => PatientCard(
-                      currentIndex: index,
-                      dataP:
-                          cubit.patientModel?.data?.data?[index] ?? Details(),
-                    ),
-                    separatorBuilder: (context, index) =>
-                        SizedBox(height: 10.h),
-                    itemCount: cubit.patientModel?.data?.data?.length ?? 1,
-                  ),
+                  child: cubit.patientModel!.data!.data!.isEmpty
+                      ? Center(
+                          child: LottieBuilder.asset(
+                            "assets/lottie_files/no_result_found.json",
+                          ),
+                        )
+                      : ListView.separated(
+                          itemBuilder: (context, index) => PatientCard(
+                            currentIndex: index,
+                            dataP: cubit.patientModel?.data?.data?[index] ??
+                                Details(),
+                          ),
+                          separatorBuilder: (context, index) => SizedBox(
+                            height: 10.h,
+                          ),
+                          itemCount:
+                              cubit.patientModel?.data?.data?.length ?? 1,
+                        ),
                 ),
           bottomNavigationBar: Padding(
             padding: EdgeInsetsDirectional.only(
@@ -60,9 +99,12 @@ class AllPatient extends StatelessWidget {
               radius: 20.r,
               height: 70.h,
               onPressed: () {
-                Navigation.goPush(context, AddPatientScreen());
+                Navigation.goPush(
+                  context,
+                  const AddPatientScreen(),
+                );
               },
-              child: Text(
+              child: const Text(
                 "Add New Patient",
               ),
             ),

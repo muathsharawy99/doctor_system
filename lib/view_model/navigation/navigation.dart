@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 
-
 class Navigation {
-
-
-
-
-  static void goPop(context){
+  static void goPop(context) {
     Navigator.pop(context);
   }
-
 
   static void goPush(context, Widget screen) {
     Navigator.push(
@@ -20,7 +14,6 @@ class Navigation {
     );
   }
 
-
   static void goPushAndReplacement(context, Widget screen) {
     Navigator.pushReplacement(
       context,
@@ -30,5 +23,13 @@ class Navigation {
     );
   }
 
-
+  static void pushAndRemoveUntil(context, Widget secondScreen) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => secondScreen,
+      ),
+      (route) => false,
+    );
+  }
 }

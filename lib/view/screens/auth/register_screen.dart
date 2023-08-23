@@ -1,7 +1,9 @@
 import 'package:doctor/view/components/my_customization/custom_button.dart';
 import 'package:doctor/view/components/my_customization/custom_textfield.dart';
+import 'package:doctor/view/screens/auth/login_screen.dart';
 import 'package:doctor/view_model/bloc/register_bloc/register_cubit.dart';
 import 'package:doctor/view_model/bloc/register_bloc/register_state.dart';
+import 'package:doctor/view_model/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,49 +45,63 @@ class RegisterScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 200.h,
+                      height: 175.h,
                       child: LottieBuilder.asset(
-                        "assets/lottie_files/register_hello.json",
+                        "assets/lottie_files/hello.json",
                       ),
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       controller: cubit.nameController,
                       keyboardType: TextInputType.name,
                       label: "Name",
+                      validator: (v) {
+                        if (v!.isEmpty) {
+                          return "Your must type your name";
+                        }
+                        return null;
+                      },
                       whatToDoNext: TextInputAction.next,
                       suffixIcon: IconButton(
                         onPressed: () {
                           cubit.nameController.clear();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.close_rounded,
                           color: Colors.red,
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 15.h,
                     ),
                     CustomTextField(
                       radius: 10.r,
                       controller: cubit.emailController,
                       keyboardType: TextInputType.emailAddress,
                       label: "Email",
+                      validator: (v) {
+                        if (v!.isEmpty) {
+                          return "Your must type your email";
+                        }
+                        return null;
+                      },
                       whatToDoNext: TextInputAction.next,
                       suffixIcon: IconButton(
                         onPressed: () {
                           cubit.emailController.clear();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.close_rounded,
                           color: Colors.red,
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       controller: cubit.passwordController,
                       keyboardType: TextInputType.visiblePassword,
                       label: "Password",
@@ -102,19 +118,19 @@ class RegisterScreen extends StatelessWidget {
                           cubit.showPassword();
                         },
                         icon: cubit.isVisible == true
-                            ? Icon(
+                            ? const Icon(
                                 Icons.visibility_outlined,
                               )
-                            : Icon(
+                            : const Icon(
                                 Icons.visibility_off_outlined,
                               ),
                       ),
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 15.h,
                     ),
-
                     CustomTextField(
+                      radius: 10.r,
                       controller: cubit.addressController,
                       keyboardType: TextInputType.streetAddress,
                       label: "Address",
@@ -129,14 +145,14 @@ class RegisterScreen extends StatelessWidget {
                         onPressed: () {
                           cubit.addressController.clear();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.close_rounded,
                           color: Colors.red,
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 15.h,
                     ),
                     CustomButton(
                       width: double.infinity,
@@ -155,7 +171,23 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 15.h,
+                    ),
+                    const Text("Already have an account"),
+                    TextButton(
+                      onPressed: () {
+                        cubit.clearController();
+                        Navigation.goPush(
+                          context,
+                          const LoginScreen(),
+                        );
+                      },
+                      child: Text(
+                        "Login Now",
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                        ),
+                      ),
                     ),
                     RichText(
                       text: const TextSpan(
@@ -185,66 +217,6 @@ class RegisterScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // Wrap(
-                    //   crossAxisAlignment: WrapCrossAlignment.center,
-                    //   children: [
-                    //
-                    //     RichText(
-                    //       textScaleFactor: 1.2,
-                    //       textHeightBehavior: const TextHeightBehavior(
-                    //           applyHeightToFirstAscent: !true),
-                    //       text: TextSpan(
-                    //         text: "By continuing you agree to our ",
-                    //         style: TextStyle(
-                    //           fontSize: 12.sp,
-                    //           color: Colors.black,
-                    //           height: 1.5,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     TextButton(
-                    //       onPressed: () {},
-                    //       style: TextButton.styleFrom(
-                    //         padding: EdgeInsets.zero,
-                    //         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    //         minimumSize: Size(10.w, 20.h),
-                    //         maximumSize: Size(double.infinity, 20.h),
-                    //       ),
-                    //       child: Text(
-                    //         "Customer Terms of Service, Privacy Policy ",
-                    //         style: TextStyle(
-                    //             fontSize: 12.sp, height: 1.3),
-                    //       ),
-                    //     ),
-                    //     RichText(
-                    //       textScaleFactor: 1.2,
-                    //       text: TextSpan(
-                    //         text: "and ",
-                    //         style: TextStyle(
-                    //           color: Colors.black,
-                    //           fontSize: 12.sp,
-                    //           height:1.5,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     TextButton(
-                    //       onPressed: () {},
-                    //       style: TextButton.styleFrom(
-                    //         padding: EdgeInsets.zero,
-                    //         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    //         minimumSize: Size(10.w, 20.h),
-                    //         maximumSize: Size(double.infinity, 20.h),
-                    //       ),
-                    //       child: Text(
-                    //         "Cookie Policy.",
-                    //         style: TextStyle(
-                    //           fontSize: 12.sp,
-                    //           height: 1.5,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),

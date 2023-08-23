@@ -14,7 +14,6 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   var formKey = GlobalKey<FormState>();
 
-
   bool isVisible = true;
 
   var nameController = TextEditingController();
@@ -37,14 +36,23 @@ class RegisterCubit extends Cubit<RegisterState> {
     }).then((value) {
       if (value.data['code'] == 200 || value.data['code'] == 201) {
         showToast(msg: value.data['message'], isError: false);
-        Navigation.goPush(context, LoginScreen());
-        // print("register success");
+        Navigation.pushAndRemoveUntil(
+          context,
+          const LoginScreen(),
+        );
+        clearController();
         emit(RegisterSuccessState());
       } else {
         showToast(msg: value.data['message'], isError: true);
         emit(RegisterErrorState());
-        // print("Err");
       }
     });
+  }
+
+  void clearController() {
+    nameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    addressController.clear();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -9,21 +10,38 @@ class SplashScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          "assets/images/medicine.png",
-          width: 200.w,
-        ),
         SizedBox(
-          height: 50.h,
-        ),
-        Text(
-          "Medical App",
-          style: TextStyle(
-            fontSize: 35.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+          width: 400.w,
+          child: LottieBuilder.asset(
+            "assets/lottie_files/logo.json",
           ),
-        )
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "D",
+              style: TextStyle(
+                fontSize: 50.sp,
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Icon(
+              Icons.favorite,
+              color: Colors.red,
+              size: 35.w,
+            ),
+            Text(
+              "cCare",
+              style: TextStyle(
+                fontSize: 50.sp,
+                color: Colors.orange,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),
       ],
     );
   }

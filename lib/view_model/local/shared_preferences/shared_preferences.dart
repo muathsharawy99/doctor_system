@@ -1,16 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class SharedPreference {
-
-
   static SharedPreferences? prefs;
-
 
   static initShared() async {
     prefs = await SharedPreferences.getInstance();
   }
-
 
   static void set(String key, dynamic value) async {
     if (value is int) {
@@ -26,20 +21,15 @@ class SharedPreference {
     }
   }
 
-
   static dynamic get(String key) {
     return prefs?.get(key);
   }
-
 
   static void remove(String key) async {
     prefs?.remove(key);
   }
 
-
   static void clear() async {
     prefs?.clear();
   }
-
-
 }

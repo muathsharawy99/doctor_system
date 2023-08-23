@@ -7,28 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AddPatientScreen extends StatelessWidget {
-  const AddPatientScreen({Key? key}) : super(key: key);
+class DoctorScreen extends StatelessWidget {
+  const DoctorScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PatientCubit, PatientState>(
-      listener: (context, state) {
-        if (state is AddNewPatientSuccessState) {
-          BlocProvider.of<PatientCubit>(context).clearController();
-          Navigation.goPop(context);
-        } else {
-          null;
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         var cubit = PatientCubit.get(context);
+        cubit.initDoctorController();
         return Scaffold(
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
             leading: IconButton(
               onPressed: () {
-                cubit.getAllPatient();
                 Navigation.goPop(context);
                 cubit.clearController();
               },
@@ -41,7 +34,7 @@ class AddPatientScreen extends StatelessWidget {
             elevation: 0,
             centerTitle: true,
             title: const Text(
-              "Add New Patient",
+              "Profile",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -72,7 +65,7 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     Text(
-                      "Date of birth",
+                      "Password",
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -82,14 +75,15 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
-                      controller: cubit.dOBController,
+                      controller: cubit.passwordController,
                       keyboardType: TextInputType.datetime,
+                      obscureText: true,
                     ),
                     SizedBox(
                       height: 15.h,
                     ),
                     Text(
-                      "Diagnosis",
+                      "Type",
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -99,8 +93,25 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
-                      controller: cubit.diagnosisController,
+                      controller: cubit.typeController,
                       keyboardType: TextInputType.text,
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    Text(
+                      "Title",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    CustomTextField(
+                      controller: cubit.titleController,
+                      keyboardType: TextInputType.datetime,
                     ),
                     SizedBox(
                       height: 15.h,
@@ -122,40 +133,33 @@ class AddPatientScreen extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-                    Text(
-                      "Visit time",
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    CustomTextField(
-                      controller: cubit.visitTimeController,
-                      keyboardType: TextInputType.datetime,
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CustomButton(
-                          width: 300.w,
+                          width: 150.w,
                           height: 50.h,
                           radius: 30.r,
-                          bGColor: Colors.blue,
+                          bGColor: Colors.green,
+                          onPressed: () {},
+                          child: const Text(
+                            "Save",
+                          ),
+                        ),
+                        CustomButton(
+                          width: 150.w,
+                          height: 50.h,
+                          radius: 30.r,
+                          bGColor: Colors.red,
                           onPressed: () {
-                            cubit.addNewPatient();
+                            cubit.logout(context);
                           },
                           child: const Text(
-                            "Add Patient",
+                            "Logout",
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

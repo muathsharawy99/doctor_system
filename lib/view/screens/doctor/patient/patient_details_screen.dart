@@ -1,4 +1,3 @@
-import 'package:doctor/model/patient_model.dart';
 import 'package:doctor/view/components/my_customization/custom_button.dart';
 import 'package:doctor/view/components/my_customization/custom_textfield.dart';
 import 'package:doctor/view_model/bloc/patient_bloc/patient_cubit.dart';
@@ -7,6 +6,7 @@ import 'package:doctor/view_model/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class PatientDetailsScreen extends StatelessWidget {
   const PatientDetailsScreen({Key? key}) : super(key: key);
@@ -18,7 +18,9 @@ class PatientDetailsScreen extends StatelessWidget {
         if (state is UpdatePatientLoadingState ||
             state is DeletePatientLoadingState) {
           Center(
-            child: CircularProgressIndicator.adaptive(),
+            child: LottieBuilder.asset(
+              "assets/lottie_files/hello.json",
+            ),
           );
         }
         if (state is UpdatePatientSuccessState ||
@@ -29,7 +31,7 @@ class PatientDetailsScreen extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit = PatientCubit.get(context);
-        cubit.initController();
+        cubit.initPatientController();
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
@@ -38,7 +40,7 @@ class PatientDetailsScreen extends StatelessWidget {
                 Navigation.goPop(context);
                 cubit.clearController();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios_new_outlined,
               ),
             ),
@@ -46,7 +48,7 @@ class PatientDetailsScreen extends StatelessWidget {
             backgroundColor: Colors.blue,
             toolbarHeight: 70.h,
             elevation: 0,
-            title: Text(
+            title: const Text(
               "Patient Details",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -156,7 +158,7 @@ class PatientDetailsScreen extends StatelessWidget {
                           onPressed: () {
                             cubit.updatePatient();
                           },
-                          child: Text(
+                          child: const Text(
                             "Save",
                           ),
                         ),
@@ -168,12 +170,12 @@ class PatientDetailsScreen extends StatelessWidget {
                           onPressed: () {
                             cubit.deletePatient();
                           },
-                          child: Text(
+                          child: const Text(
                             "Delete",
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

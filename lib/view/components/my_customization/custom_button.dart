@@ -34,11 +34,11 @@ class CustomButton extends StatelessWidget {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: child,
         style: ElevatedButton.styleFrom(
           backgroundColor: bGColor,
           elevation: elevation,
         ),
+        child: child,
       ),
     );
   }
