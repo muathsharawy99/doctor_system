@@ -30,10 +30,10 @@ class SplashScreen extends StatelessWidget {
             Icon(
               Icons.favorite,
               color: Colors.red,
-              size: 35.w,
+              size: 50.w,
             ),
             Text(
-              "cCare",
+              "CARE",
               style: TextStyle(
                 fontSize: 50.sp,
                 color: Colors.orange,
