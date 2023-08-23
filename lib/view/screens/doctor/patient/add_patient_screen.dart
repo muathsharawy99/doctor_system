@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:doctor/model/patient_model.dart';
 import 'package:doctor/view/components/my_customization/custom_button.dart';
 import 'package:doctor/view/components/my_customization/custom_textfield.dart';
@@ -8,29 +10,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class PatientDetailsScreen extends StatelessWidget {
-  const PatientDetailsScreen({Key? key}) : super(key: key);
+class AddPatientScreen extends StatelessWidget {
+  const AddPatientScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PatientCubit, PatientState>(
       listener: (context, state) {
-        if (state is UpdatePatientLoadingState ||
-            state is DeletePatientLoadingState) {
-          Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
-        if (state is UpdatePatientSuccessState ||
-            state is DeletePatientSuccessState) {
+        if (state is AddNewPatientSuccessState) {
           BlocProvider.of<PatientCubit>(context).clearController();
           Navigation.goPop(context);
+        } else {
+          null;
         }
       },
       builder: (context, state) {
         var cubit = PatientCubit.get(context);
-        cubit.initController();
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
             leading: IconButton(
               onPressed: () {
@@ -42,12 +39,12 @@ class PatientDetailsScreen extends StatelessWidget {
                 Icons.arrow_back_ios_new_outlined,
               ),
             ),
-            centerTitle: true,
             backgroundColor: Colors.blue,
             toolbarHeight: 70.h,
             elevation: 0,
+            centerTitle: true,
             title: Text(
-              "Patient Details",
+              "Add New Patient",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -149,27 +146,15 @@ class PatientDetailsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CustomButton(
-                          width: 150.w,
+                          width: 300.w,
                           height: 50.h,
                           radius: 30.r,
-                          bGColor: Colors.green,
+                          bGColor: Colors.blue,
                           onPressed: () {
-                            cubit.updatePatient();
+                            cubit.addNewPatient();
                           },
                           child: Text(
-                            "Save",
-                          ),
-                        ),
-                        CustomButton(
-                          width: 150.w,
-                          height: 50.h,
-                          radius: 30.r,
-                          bGColor: Colors.red,
-                          onPressed: () {
-                            cubit.deletePatient();
-                          },
-                          child: Text(
-                            "Delete",
+                            "Add Patient",
                           ),
                         ),
                       ],

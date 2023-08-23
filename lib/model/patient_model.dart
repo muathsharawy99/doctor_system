@@ -26,21 +26,19 @@ class PatientModel {
 }
 
 class Data {
-  List<DataP>? data;
-  Links? links;
-  Meta? meta;
+  List<Details>? data;
 
-  Data({this.data, this.links, this.meta});
+  Data({
+    this.data,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <DataP>[];
+      data = <Details>[];
       json['data'].forEach((v) {
-        data!.add(DataP.fromJson(v));
+        data!.add(Details.fromJson(v));
       });
     }
-    links = json['links'] != null ? Links.fromJson(json['links']) : null;
-    meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -48,17 +46,12 @@ class Data {
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    if (links != null) {
-      data['links'] = links!.toJson();
-    }
-    if (meta != null) {
-      data['meta'] = meta!.toJson();
-    }
+
     return data;
   }
 }
 
-class DataP {
+class Details {
   int? id;
   String? name;
   String? dateOfBirth;
@@ -69,7 +62,7 @@ class DataP {
   String? createdAt;
   String? updatedAt;
 
-  DataP(
+  Details(
       {this.id,
       this.name,
       this.dateOfBirth,
@@ -80,7 +73,7 @@ class DataP {
       this.createdAt,
       this.updatedAt});
 
-  DataP.fromJson(Map<String, dynamic> json) {
+  Details.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     dateOfBirth = json['date_of_birth'];
@@ -103,102 +96,6 @@ class DataP {
     data['user_id'] = userId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
-    return data;
-  }
-}
-
-class Links {
-  String? first;
-  String? last;
-
-  Links({
-    this.first,
-    this.last,
-  });
-
-  Links.fromJson(Map<String, dynamic> json) {
-    first = json['first'];
-    last = json['last'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['first'] = first;
-    data['last'] = last;
-    return data;
-  }
-}
-
-class Meta {
-  int? currentPage;
-  int? from;
-  int? lastPage;
-  List<Link>? links;
-  String? path;
-  int? perPage;
-  int? to;
-  int? total;
-
-  Meta(
-      {this.currentPage,
-      this.from,
-      this.lastPage,
-      this.links,
-      this.path,
-      this.perPage,
-      this.to,
-      this.total});
-
-  Meta.fromJson(Map<String, dynamic> json) {
-    currentPage = json['current_page'];
-    from = json['from'];
-    lastPage = json['last_page'];
-    if (json['links'] != null) {
-      links = <Link>[];
-      json['links'].forEach((v) {
-        links!.add(Link.fromJson(v));
-      });
-    }
-    path = json['path'];
-    perPage = json['per_page'];
-    to = json['to'];
-    total = json['total'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['current_page'] = currentPage;
-    data['from'] = from;
-    data['last_page'] = lastPage;
-    if (links != null) {
-      data['links'] = links!.map((v) => v.toJson()).toList();
-    }
-    data['path'] = path;
-    data['per_page'] = perPage;
-    data['to'] = to;
-    data['total'] = total;
-    return data;
-  }
-}
-
-class Link {
-  String? url;
-  String? label;
-  bool? active;
-
-  Link({this.url, this.label, this.active});
-
-  Link.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-    label = json['label'];
-    active = json['active'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['url'] = url;
-    data['label'] = label;
-    data['active'] = active;
     return data;
   }
 }

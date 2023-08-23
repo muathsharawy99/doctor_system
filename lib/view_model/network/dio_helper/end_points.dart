@@ -24,6 +24,7 @@ class EndPoints{
   static String doctorAddPatient = "doctorpatients";
   static String doctorUpdateData = "doctorpatients";
   static String doctorGetAllPatients = "doctorpatients";
+  static String doctorUpdatePatient = "doctorpatients";
   static String doctorDeletePatient = "patients";
 
 

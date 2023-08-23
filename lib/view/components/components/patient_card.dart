@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PatientCard extends StatelessWidget {
-  final DataP? dataP;
+  final Details? dataP;
   int? currentIndex;
 
   PatientCard({required this.dataP, required this.currentIndex, Key? key})
