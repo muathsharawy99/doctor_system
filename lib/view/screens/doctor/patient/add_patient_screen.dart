@@ -16,6 +16,7 @@ class AddPatientScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is AddNewPatientSuccessState) {
           BlocProvider.of<PatientCubit>(context).clearController();
+          BlocProvider.of<PatientCubit>(context).getAllPatient();
           Navigation.goPop(context);
         } else {
           null;
