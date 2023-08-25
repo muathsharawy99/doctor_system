@@ -16,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String? v)? validator;
   final TextInputAction? whatToDoNext;
   final BorderSide? borderSide;
+  final Function()? onTap;
 
   const CustomTextField({
     Key? key,
@@ -31,6 +32,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.whatToDoNext,
     this.borderSide,
+    this.onTap,
     required this.controller,
     required this.keyboardType,
   }) : super(key: key);
@@ -42,6 +44,7 @@ class CustomTextField extends StatelessWidget {
         radius ?? 0.r,
       ),
       child: TextFormField(
+        onTap: onTap,
         controller: controller,
         keyboardType: keyboardType,
         readOnly: readOnly ?? false,

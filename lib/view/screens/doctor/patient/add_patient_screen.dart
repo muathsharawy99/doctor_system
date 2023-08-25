@@ -82,8 +82,19 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      onTap: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1924),
+                          lastDate: DateTime.now(),
+                        ).then(
+                          (value) =>
+                              cubit.dOBController.text = value.toString(),
+                        );
+                      },
                       controller: cubit.dOBController,
-                      keyboardType: TextInputType.datetime,
+                      keyboardType: TextInputType.none,
                     ),
                     SizedBox(
                       height: 15.h,
@@ -133,8 +144,19 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      onTap: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2030),
+                        ).then(
+                          (value) =>
+                              cubit.visitTimeController.text = value.toString(),
+                        );
+                      },
                       controller: cubit.visitTimeController,
-                      keyboardType: TextInputType.datetime,
+                      keyboardType: TextInputType.none,
                     ),
                     SizedBox(
                       height: 15.h,
