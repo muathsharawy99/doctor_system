@@ -77,6 +77,7 @@ class AllPatientScreen extends StatelessWidget {
                           ),
                         )
                       : ListView.separated(
+                    physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) => PatientCard(
                             currentIndex: index,
                             dataP: cubit.patientModel?.data?.data?[index] ??
@@ -105,8 +106,8 @@ class AllPatientScreen extends StatelessWidget {
                 );
               },
               child: const Text(
-                "Add New Patient",
-              ),
+                      "Add New Patient",
+                    ),
             ),
           ),
         );

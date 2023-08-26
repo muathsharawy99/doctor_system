@@ -36,9 +36,9 @@ class PatientDetailsScreen extends StatelessWidget {
           appBar: AppBar(
             leading: IconButton(
               onPressed: () {
+                cubit.clearController();
                 cubit.getAllPatient();
                 Navigation.goPop(context);
-                cubit.clearController();
               },
               icon: const Icon(
                 Icons.arrow_back_ios_new_outlined,
@@ -73,6 +73,7 @@ class PatientDetailsScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       controller: cubit.nameController,
                       keyboardType: TextInputType.name,
                     ),
@@ -90,8 +91,20 @@ class PatientDetailsScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      onTap: (){
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2030),
+                        ).then(
+                              (value) =>
+                          cubit.dOBController.text = value.toString(),
+                        );
+                      },
+                      radius: 10.r,
                       controller: cubit.dOBController,
-                      keyboardType: TextInputType.datetime,
+                      keyboardType: TextInputType.none,
                     ),
                     SizedBox(
                       height: 15.h,
@@ -107,6 +120,7 @@ class PatientDetailsScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       controller: cubit.diagnosisController,
                       keyboardType: TextInputType.text,
                     ),
@@ -124,6 +138,7 @@ class PatientDetailsScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       controller: cubit.addressController,
                       keyboardType: TextInputType.streetAddress,
                     ),
@@ -141,8 +156,20 @@ class PatientDetailsScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
+                      onTap: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2030),
+                        ).then(
+                          (value) =>
+                              cubit.visitTimeController.text = value.toString(),
+                        );
+                      },
                       controller: cubit.visitTimeController,
-                      keyboardType: TextInputType.datetime,
+                      keyboardType: TextInputType.none,
                     ),
                     SizedBox(
                       height: 15.h,

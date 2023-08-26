@@ -66,6 +66,7 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       controller: cubit.nameController,
                       keyboardType: TextInputType.name,
                     ),
@@ -83,16 +84,22 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       onTap: () {
                         showDatePicker(
                           context: context,
+                          currentDate: DateTime.now(),
                           initialDate: DateTime.now(),
                           firstDate: DateTime(1924),
                           lastDate: DateTime.now(),
-                        ).then(
+                        )
+                            .then(
                           (value) =>
                               cubit.dOBController.text = value.toString(),
-                        );
+                        )
+                            .catchError((onError) {
+                          print(onError);
+                        });
                       },
                       controller: cubit.dOBController,
                       keyboardType: TextInputType.none,
@@ -111,6 +118,7 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       controller: cubit.diagnosisController,
                       keyboardType: TextInputType.text,
                     ),
@@ -128,6 +136,7 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       controller: cubit.addressController,
                       keyboardType: TextInputType.streetAddress,
                     ),
@@ -145,6 +154,7 @@ class AddPatientScreen extends StatelessWidget {
                       height: 15.h,
                     ),
                     CustomTextField(
+                      radius: 10.r,
                       onTap: () {
                         showDatePicker(
                           context: context,
@@ -173,9 +183,11 @@ class AddPatientScreen extends StatelessWidget {
                           onPressed: () {
                             cubit.addNewPatient();
                           },
-                          child: const Text(
-                            "Add Patient",
-                          ),
+                          child: state is AddNewPatientLoadingState
+                              ? CircularProgressIndicator.adaptive()
+                              : Text(
+                                  "Add Patient",
+                                ),
                         ),
                       ],
                     )

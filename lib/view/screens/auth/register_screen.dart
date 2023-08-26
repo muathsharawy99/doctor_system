@@ -163,12 +163,14 @@ class RegisterScreen extends StatelessWidget {
                           cubit.register(context);
                         }
                       },
-                      child: Text(
-                        "Create Account",
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                        ),
-                      ),
+                      child: state is RegisterLoadingState
+                          ? CircularProgressIndicator.adaptive()
+                          : Text(
+                              "Create Account",
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                              ),
+                            ),
                     ),
                     SizedBox(
                       height: 15.h,

@@ -57,7 +57,7 @@ class DoctorScreen extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-                    CustomTextField(
+                    CustomTextField(radius: 10.r,label: "Name",
                       controller: cubit.nameController,
                       keyboardType: TextInputType.name,
                     ),
@@ -74,7 +74,7 @@ class DoctorScreen extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-                    CustomTextField(
+                    CustomTextField(radius: 10.r,label: "Password",
                       controller: cubit.passwordController,
                       keyboardType: TextInputType.datetime,
                       obscureText: true,
@@ -92,7 +92,7 @@ class DoctorScreen extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-                    CustomTextField(
+                    CustomTextField(radius: 10.r,label: "Type",
                       controller: cubit.typeController,
                       keyboardType: TextInputType.text,
                     ),
@@ -109,7 +109,7 @@ class DoctorScreen extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-                    CustomTextField(
+                    CustomTextField(radius: 10.r,label: "Title",
                       controller: cubit.titleController,
                       keyboardType: TextInputType.datetime,
                     ),
@@ -126,7 +126,7 @@ class DoctorScreen extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-                    CustomTextField(
+                    CustomTextField(radius: 10.r,label: "Address",
                       controller: cubit.addressController,
                       keyboardType: TextInputType.streetAddress,
                     ),

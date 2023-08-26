@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             home: AnimatedSplashScreen(
+              // duration: 60000,
               backgroundColor: Colors.white,
               nextScreen: const RegisterScreen(),
               splashTransition: SplashTransition.fadeTransition,

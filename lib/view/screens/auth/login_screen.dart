@@ -253,12 +253,17 @@ class LoginScreen extends StatelessWidget {
                     );
                   }
                 },
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                  ),
-                ),
+                child: state is LoginLoadingState
+                    ? CircularProgressIndicator.adaptive(
+                        backgroundColor: Colors.white,
+                        strokeWidth: 2,
+                      )
+                    : Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                        ),
+                      ),
               ),
             ),
           ),

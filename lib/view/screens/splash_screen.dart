@@ -14,6 +14,7 @@ class SplashScreen extends StatelessWidget {
           width: 400.w,
           child: LottieBuilder.asset(
             "assets/lottie_files/logo.json",
+            repeat: false,
           ),
         ),
         Row(
