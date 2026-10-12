@@ -1,0 +1,61 @@
+{
+  "lang": "en",
+  "poor_connection_check_the_quality_of_the_internet": "Poor connection. Check the quality of the internet",
+  "please_check_your_internet_connection": "Please check your internet connection",
+  "something_went_wrong_please_try_again": "Something went wrong, please try again.",
+  "static": {
+    "refresh": "Refresh",
+    "save": "Save",
+    "delete": "Delete"
+  },
+  "validations": {
+    "empty_name": "Your must type your name",
+    "empty_email": "Your must type your email",
+    "password_min": "Your password must be at least 8 characters",
+    "address_min": "Your address must be at least 6 characters",
+    "select_type": "Please select your type",
+    "there_is_no_data": "No patients yet"
+  },
+  "auth": {
+    "create_account": "Create Account",
+    "login_title": "Login To Your Account",
+    "login": "Login",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "address": "Address",
+    "have_account": "Already have an account",
+    "login_now": "Login Now",
+    "terms_prefix": "By continuing you agreeing to our ",
+    "terms_services": "Customer Terms of Services, Privacy Policy, ",
+    "terms_and": "and ",
+    "terms_cookie": "Cookie Policy.",
+    "role_doctor": "Doctor",
+    "role_admin": "Admin"
+  },
+  "patients": {
+    "list_title": "Patient List",
+    "add_title": "Add New Patient",
+    "details_title": "Patient Details",
+    "add_new": "Add New Patient",
+    "add": "Add Patient",
+    "name": "Name",
+    "date_of_birth": "Date of birth",
+    "diagnosis": "Diagnosis",
+    "address": "Address",
+    "visit_time": "Visit time",
+    "no_name": "No Name",
+    "no_diagnosis": "No Diagnosis",
+    "no_visit_time": "No Visit Time",
+    "no_address": "No Address"
+  },
+  "profile": {
+    "title": "Profile",
+    "name": "Name",
+    "password": "Password",
+    "type": "Type",
+    "title_field": "Title",
+    "address": "Address",
+    "logout": "Logout"
+  }
+}

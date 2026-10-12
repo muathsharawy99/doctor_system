@@ -1,0 +1,61 @@
+{
+  "lang": "ar",
+  "poor_connection_check_the_quality_of_the_internet": "الاتصال ضعيف، تحقق من جودة الإنترنت",
+  "please_check_your_internet_connection": "برجاء التحقق من اتصالك بالإنترنت",
+  "something_went_wrong_please_try_again": "حدث خطأ ما، برجاء المحاولة مرة أخرى",
+  "static": {
+    "refresh": "تحديث",
+    "save": "حفظ",
+    "delete": "حذف"
+  },
+  "validations": {
+    "empty_name": "يجب إدخال الاسم",
+    "empty_email": "يجب إدخال البريد الإلكتروني",
+    "password_min": "يجب ألا تقل كلمة المرور عن 8 أحرف",
+    "address_min": "يجب ألا يقل العنوان عن 6 أحرف",
+    "select_type": "برجاء اختيار نوع الحساب",
+    "there_is_no_data": "لا يوجد مرضى بعد"
+  },
+  "auth": {
+    "create_account": "إنشاء حساب",
+    "login_title": "تسجيل الدخول إلى حسابك",
+    "login": "تسجيل الدخول",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "address": "العنوان",
+    "have_account": "لديك حساب بالفعل",
+    "login_now": "سجّل الدخول الآن",
+    "terms_prefix": "بالمتابعة أنت توافق على ",
+    "terms_services": "شروط خدمة العملاء وسياسة الخصوصية، ",
+    "terms_and": "و",
+    "terms_cookie": "سياسة ملفات تعريف الارتباط.",
+    "role_doctor": "طبيب",
+    "role_admin": "مسؤول"
+  },
+  "patients": {
+    "list_title": "قائمة المرضى",
+    "add_title": "إضافة مريض جديد",
+    "details_title": "بيانات المريض",
+    "add_new": "إضافة مريض جديد",
+    "add": "إضافة المريض",
+    "name": "الاسم",
+    "date_of_birth": "تاريخ الميلاد",
+    "diagnosis": "التشخيص",
+    "address": "العنوان",
+    "visit_time": "موعد الزيارة",
+    "no_name": "بدون اسم",
+    "no_diagnosis": "بدون تشخيص",
+    "no_visit_time": "بدون موعد",
+    "no_address": "بدون عنوان"
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "name": "الاسم",
+    "password": "كلمة المرور",
+    "type": "النوع",
+    "title_field": "اللقب",
+    "address": "العنوان",
+    "logout": "تسجيل الخروج"
+  }
+}

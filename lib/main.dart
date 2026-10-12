@@ -1,60 +1,88 @@
-import 'package:doctor/view/screens/auth/register_screen.dart';
-import 'package:doctor/view_model/bloc/login_bloc/login_cubit.dart';
-import 'package:doctor/view_model/bloc/patient_bloc/patient_cubit.dart';
-import 'package:doctor/view_model/bloc/register_bloc/register_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:doctor/view/screens/splash_screen.dart';
-import 'package:doctor/view_model/bloc/bloc_observer/bloc_observer.dart';
-import 'package:doctor/view_model/local/shared_preferences/shared_preferences.dart';
-import 'package:doctor/view_model/network/dio_helper/dio_helper.dart';
+import 'dart:ui';
 
-Future<void> main() async {
+import 'package:easy_localization/easy_localization.dart' as lang;
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'core/extensions/unified_extensions.dart';
+import 'core/services/bloc_observer.dart';
+import 'core/services/service_locator.dart';
+import 'core/services/shared_preference.dart';
+import 'core/utils/theme/light_theme.dart';
+import 'core/utils/unfocus.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreference.initShared();
-  Bloc.observer = MyBlocObserver();
-  await DioHelper.init();
-  runApp(const MyApp());
+  PlatformDispatcher.instance.onError = (error, stack) {
+    debugPrint('Uncaught error: $error');
+    debugPrintStack(stackTrace: stack);
+    return true;
+  };
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  await Future.wait([
+    lang.EasyLocalization.ensureInitialized(),
+    ScreenUtil.ensureScreenSize(),
+    CacheHelper.init(),
+  ]);
+
+  Bloc.observer = AppBlocObserver();
+  UserModel.i.get();
+  ServicesLocator().init();
+  runApp(const DoctorApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DoctorApp extends StatelessWidget {
+  const DoctorApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width);
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => RegisterCubit(),
-            ),
-            BlocProvider(
-              create: (context) => LoginCubit(),
-            ),
-            BlocProvider(
-              create: (context) => PatientCubit()..getAllPatient(),
-            )
-          ],
-          child: MaterialApp(
+    return lang.EasyLocalization(
+      path: 'assets/translations',
+      saveLocale: true,
+      startLocale: const Locale('en'),
+      fallbackLocale: const Locale('en'),
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      child: ScreenUtilInit(
+        designSize: AppConstants.appSize,
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp(
+            title: 'D❤CARE',
+            themeMode: ThemeMode.light,
+            initialRoute: AppRoutes.init.initial,
+            routes: AppRoutes.init.appRoutes,
+            navigatorKey: navigator,
             debugShowCheckedModeBanner: false,
-            home: AnimatedSplashScreen(
-              // duration: 60000,
-              backgroundColor: Colors.white,
-              nextScreen: const RegisterScreen(),
-              splashTransition: SplashTransition.fadeTransition,
-              splash: const SplashScreen(),
-              splashIconSize: MediaQuery.of(context).size.height,
-            ),
-          ),
-        );
-      },
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            theme: LightTheme.getTheme(),
+            builder: (context, child) {
+              ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+                FlutterError.dumpErrorToConsole(errorDetails);
+                if (kReleaseMode) {
+                  return const SizedBox.shrink();
+                }
+                return ErrorWidget(errorDetails.exception);
+              };
+              return MediaQuery(
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(textScaler: TextScaler.linear(1.sp)),
+                child: Unfocus(child: child ?? const SizedBox.shrink()),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
